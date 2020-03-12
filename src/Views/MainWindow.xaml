@@ -8,13 +8,48 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
-        <Button Width="100" Height="30" Command="{Binding ExampleCommand}">Example Button</Button>
 
-        <StatusBar Grid.Row="2" >
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Open"/>
+                <Separator/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="Repository">
+                <MenuItem Header="Checkout"/>
+            </MenuItem>
+            <MenuItem Header="View"/>
+            <MenuItem Header="About">
+                <MenuItem Header="Contact"/>
+                <Separator/>
+                <MenuItem Header="About"/>
+            </MenuItem>
+        </Menu>
+
+        <Border Grid.Row="1" Background="#EBEBEB" BorderBrush="#A9ACAF" BorderThickness="1,1,1,1" Height="45" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="10,0,0,0" HorizontalAlignment="Left">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="0,0,10,0"/>
+                        <Setter Property="BorderBrush" Value="#A9ACAF"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="Checkout" Height="24" MinWidth="70" Padding="10,0,10,1" />
+                <Button Content="Commit" Height="24" MinWidth="70" IsCancel="True" Padding="10,0,10,1" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="2">
+            
+        </Grid>
+
+        <StatusBar Grid.Row="3" >
             <TextBlock Text="{Binding StatusBarText}" Margin="5 0"/>
         </StatusBar>
     </Grid>
