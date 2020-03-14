@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:svnTrack"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="svnTrack" MinHeight="200" MinWidth="300" Height="700" Width="1000" ResizeMode="CanResizeWithGrip">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -49,9 +49,6 @@
                     <Style TargetType="{x:Type Button}" x:Key="{x:Static ToolBar.ButtonStyleKey}" >
                         <Setter Property="Margin" Value="5"/>
                         <Setter Property="Padding" Value="5"/>
-                        <Setter Property="Height" Value="24"/>
-                        <Setter Property="Width" Value="42"/>
-                        <Setter Property="Height" Value="42"/>
                     </Style>
                 </ToolBar.Resources>
                 <Button ToolTip="Svn Checkout">
@@ -128,13 +125,27 @@
         -->
 
         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TreeView>
+                <TreeViewItem Header="Repositories" IsExpanded="True">
+                    <TreeViewItem Header="Repository 01"/>
+                    <TreeViewItem Header="Repository 02"/>
+                    <TreeViewItem Header="Repository 03"/>
+                    <TreeViewItem Header="Repository 04"/>
+                </TreeViewItem>
+            </TreeView>
             
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="#EBEBEB" BorderBrush="#A9ACAF" BorderThickness="1,0,1,0"/>
         </Grid>
 
-        <Border Grid.Row="3" BorderBrush="#A9ACAF" BorderThickness="1,1,1,1" VerticalAlignment="Top">
-            <StatusBar>
-                <TextBlock Text="{Binding StatusBarText}" Margin="5 0"/>
-            </StatusBar>
-        </Border>
+
+        <StatusBar Grid.Row="3"   BorderBrush="#A9ACAF" BorderThickness="1,1,1,1">
+            <TextBlock Text="{Binding StatusBarText}" Margin="5 0"/>
+        </StatusBar>
     </Grid>
 </Window>
