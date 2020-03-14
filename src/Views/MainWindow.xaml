@@ -16,14 +16,26 @@
 
         <Menu Grid.Row="0">
             <MenuItem Header="File">
-                <MenuItem Header="Open"/>
+                <MenuItem Header="Settings"/>
                 <Separator/>
                 <MenuItem Header="Exit"/>
             </MenuItem>
             <MenuItem Header="Repository">
                 <MenuItem Header="Checkout"/>
+                <Separator/>
+                <MenuItem Header="Update"/>
+                <MenuItem Header="Commit"/>
+                <Separator/>
+                <MenuItem Header="Switch"/>
+                <Separator/>
+                <MenuItem Header="Status"/>
             </MenuItem>
-            <MenuItem Header="View"/>
+            <MenuItem Header="View">
+                <MenuItem Header="Theme">
+                    <MenuItem Header="Dark Mode"/>
+                    <MenuItem Header="Light Mode"/>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="About">
                 <MenuItem Header="Contact"/>
                 <Separator/>
@@ -31,6 +43,30 @@
             </MenuItem>
         </Menu>
 
+        <ToolBarTray Grid.Row="1">
+            <ToolBar ToolBarTray.IsLocked="True">
+                <ToolBar.Resources>
+                    <Style TargetType="{x:Type Button}" x:Key="{x:Static ToolBar.ButtonStyleKey}" >
+                        <Setter Property="Padding" Value="10,0,10,1"/>
+                        <Setter Property="Height" Value="24"/>
+                        <Setter Property="MinWidth" Value="60"/>
+                    </Style>
+                </ToolBar.Resources>
+                <Button Content="Checkout" />
+                <Separator/>
+                <Button Content="Update"/>
+                <Button Content="Commit" />
+                <Button Content="Revert"/>
+                <Button Content="Clean up"/>
+                <Button Content="Get lock"/>
+                <Button Content="Release lock"/>
+            </ToolBar>
+
+
+        </ToolBarTray>
+        
+
+        <!--
         <Border Grid.Row="1" Background="#EBEBEB" BorderBrush="#A9ACAF" BorderThickness="1,1,1,1" Height="45" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="10,0,0,0" HorizontalAlignment="Left">
                 <StackPanel.Resources>
@@ -44,6 +80,7 @@
                 <Button Content="Commit" Height="24" MinWidth="70" IsCancel="True" Padding="10,0,10,1" />
             </StackPanel>
         </Border>
+        -->
 
         <Grid Grid.Row="2">
             
