@@ -153,7 +153,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
     <Folder Include="Models\SVN\" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +166,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Checkout.png" />
+    <Resource Include="Assets\Icons\CleanUp.png" />
+    <Resource Include="Assets\Icons\Commit.png" />
+    <Resource Include="Assets\Icons\Lock.png" />
+    <Resource Include="Assets\Icons\Refresh.png" />
+    <Resource Include="Assets\Icons\Revert.png" />
+    <Resource Include="Assets\Icons\Unlock.png" />
+    <Resource Include="Assets\Icons\Update.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

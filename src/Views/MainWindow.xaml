@@ -47,19 +47,64 @@
             <ToolBar ToolBarTray.IsLocked="True">
                 <ToolBar.Resources>
                     <Style TargetType="{x:Type Button}" x:Key="{x:Static ToolBar.ButtonStyleKey}" >
-                        <Setter Property="Padding" Value="10,0,10,1"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="Padding" Value="5"/>
                         <Setter Property="Height" Value="24"/>
-                        <Setter Property="MinWidth" Value="60"/>
+                        <Setter Property="Width" Value="42"/>
+                        <Setter Property="Height" Value="42"/>
                     </Style>
                 </ToolBar.Resources>
-                <Button Content="Checkout" />
+                <Button ToolTip="Svn Checkout">
+                    <Image>
+                        <Image.Source>
+                            <BitmapImage UriSource="/Assets/Icons/Checkout.png" />
+                        </Image.Source>
+                    </Image>
+                </Button>
                 <Separator/>
-                <Button Content="Update"/>
-                <Button Content="Commit" />
-                <Button Content="Revert"/>
-                <Button Content="Clean up"/>
-                <Button Content="Get lock"/>
-                <Button Content="Release lock"/>
+                <Button ToolTip="Svn Update">
+                    <Image>
+                        <Image.Source>
+                            <BitmapImage UriSource="/Assets/Icons/Update.png" />
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button ToolTip="Svn Commit">
+                    <Image>
+                        <Image.Source>
+                            <BitmapImage UriSource="/Assets/Icons/Commit.png" />
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button ToolTip="Svn Revert">
+                    <Image>
+                        <Image.Source>
+                            <BitmapImage UriSource="/Assets/Icons/Revert.png" />
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Separator/>
+                <Button ToolTip="Svn Clean Up">
+                    <Image>
+                        <Image.Source>
+                            <BitmapImage UriSource="/Assets/Icons/CleanUp.png" />
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button ToolTip="Svn Get Lock">
+                    <Image>
+                        <Image.Source>
+                            <BitmapImage UriSource="/Assets/Icons/Lock.png" />
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button ToolTip="Svn Release Lock">
+                    <Image>
+                        <Image.Source>
+                            <BitmapImage UriSource="/Assets/Icons/Unlock.png" />
+                        </Image.Source>
+                    </Image>
+                </Button>
             </ToolBar>
 
 
@@ -86,8 +131,10 @@
             
         </Grid>
 
-        <StatusBar Grid.Row="3" >
-            <TextBlock Text="{Binding StatusBarText}" Margin="5 0"/>
-        </StatusBar>
+        <Border Grid.Row="3" BorderBrush="#A9ACAF" BorderThickness="1,1,1,1" VerticalAlignment="Top">
+            <StatusBar>
+                <TextBlock Text="{Binding StatusBarText}" Margin="5 0"/>
+            </StatusBar>
+        </Border>
     </Grid>
 </Window>
