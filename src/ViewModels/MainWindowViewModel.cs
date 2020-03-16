@@ -9,6 +9,7 @@ using svnTrack.Core.Logging;
 using svnTrack.Models.Preferences;
 using svnTrack.Core.Messaging;
 using svnTrack.Models.Messages;
+using svnTrack.Models;
 
 namespace svnTrack.ViewModels
 {
@@ -17,7 +18,8 @@ namespace svnTrack.ViewModels
     {
         #region Private Commands
 
-        private ICommand _exampleCommand;
+        private ICommand _switchThemeCommand;
+        private bool _isdarkTheme = false;
 
         #endregion Private Commands
 
@@ -49,37 +51,65 @@ namespace svnTrack.ViewModels
                     NotifyPropertyChanged();
                 }
             }
+        }
 
+        public bool IsDarkTheme
+        {
+            get { return _isdarkTheme; }
+            set
+            {
+                if(value != _isdarkTheme)
+                {
+                    _isdarkTheme = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
         #endregion Public Properties
 
         #region Public Commands
 
         /// <summary>
-        /// This is the command the buttoncommand binds on
+        /// This is the command the Switchtheme button binds on
         /// </summary>
-        public ICommand ExampleCommand
+        public ICommand SwitchThemeCommand
         {
             get
             {
-                if (_exampleCommand == null)
+                if (_switchThemeCommand == null)
                 {
-                    _exampleCommand = new RelayCommand(
-                        param => Example_Execute(),
-                        param => Example_CanExecute()
+                    _switchThemeCommand = new RelayCommand(
+                        param => SwitchTheme_Execute(),
+                        param => SwitchTheme_CanExecute()
                     );
                 }
-                return _exampleCommand;
+                return _switchThemeCommand;
             }
         }
 
         /// <summary>
         /// This method is called with the command is executed
         /// </summary>
-        private void Example_Execute()
+        private void SwitchTheme_Execute()
         {
-            //publish on the exampleMessage
-            MessageHub.Instance.Publish(new ExampleMessage($"Random Number: {new Random(DateTime.Now.Millisecond).Next()}"));
+            if(App.Skin == Skin.Dark)
+            {
+                (App.Current as App).ChangeSkin(Skin.Light);
+                IsDarkTheme = false;
+            }
+
+            else
+            {
+                (App.Current as App).ChangeSkin(Skin.Dark);
+                IsDarkTheme = true;
+
+            }
+                
+
+            App.Current.MainWindow.UpdateLayout();
+
+            //publish on the Switch Theme Message
+            MessageHub.Instance.Publish(new ExampleMessage($"Theme Switched to {App.Skin.ToString()}"));
 
         }
 
@@ -87,7 +117,7 @@ namespace svnTrack.ViewModels
         /// This method is called when properties change and controls the enable state of the command
         /// </summary>
         /// <returns>true if the button is enabled, false if the button is disabled</returns>
-        private bool Example_CanExecute()
+        private bool SwitchTheme_CanExecute()
         {
             return true;
 

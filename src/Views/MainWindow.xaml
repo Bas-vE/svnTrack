@@ -104,6 +104,26 @@
                 </Button>
             </ToolBar>
 
+            <ToolBar ToolBarTray.IsLocked="True">
+                <ToggleButton Margin="5" Padding="5" Command="{Binding SwitchThemeCommand}">
+                    <Image Width="24" Height="24"  >
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsDarkTheme}" Value="False">
+                                        <Setter Property="Source" Value="/Assets/Icons/Dark.png"/>
+                                        <Setter Property="ToolTip" Value="Swith to Light Theme"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsDarkTheme}" Value="True">
+                                        <Setter Property="Source" Value="/Assets/Icons/Light.png"/>
+                                        <Setter Property="ToolTip" Value="Swith to Dark Theme"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </ToggleButton>
+            </ToolBar>
 
         </ToolBarTray>
         
@@ -126,21 +146,84 @@
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TreeView>
-                <TreeViewItem Header="Repositories" IsExpanded="True">
-                    <TreeViewItem Header="Repository 01"/>
-                    <TreeViewItem Header="Repository 02"/>
-                    <TreeViewItem Header="Repository 03"/>
-                    <TreeViewItem Header="Repository 04"/>
-                </TreeViewItem>
-            </TreeView>
-            
-            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="#EBEBEB" BorderBrush="#A9ACAF" BorderThickness="1,0,1,0"/>
+            <!-- REPOSITORY PANEL -->
+            <Grid Grid.Column="0">
+                <TreeView>
+                    <TreeViewItem Header="Repositories" IsExpanded="True">
+                        <TreeViewItem Header="Repository 01"/>
+                        <TreeViewItem Header="Repository 02"/>
+                        <TreeViewItem Header="Repository 03"/>
+                        <TreeViewItem Header="Repository 04"/>
+                    </TreeViewItem>
+                </TreeView>
+            </Grid>
+
+            <!-- FILES PANEL -->
+            <Grid Grid.Column="2">
+                <TreeView>
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="IsExpanded" Value="True" />
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeViewItem Header="Doc">
+                        <TreeViewItem Header="Manual.docx"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Src">
+                        <TreeViewItem Header="Assets">
+                            <TreeViewItem Header="Image01.png"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Core">
+                            <TreeViewItem Header="Extensions"/>
+                            <TreeViewItem Header="Logging"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Models">
+                            <TreeViewItem Header="SettingsManager.cs"/>
+                            <TreeViewItem Header="MessageMediator.cs"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="ViewModels">
+                            <TreeViewItem Header="BaseViewModel.cs"/>
+                            <TreeViewItem Header="MainWindowViewModel.cs"/>
+                            <TreeViewItem Header="MessageMediator.cs"/>
+                        </TreeViewItem>
+                        
+                        <TreeViewItem Header="Project.vsproj"/>
+                        <TreeViewItem Header="Solution.sl"/>
+                        <TreeViewItem Header="Readme.md"/>
+                    </TreeViewItem>
+                </TreeView>
+            </Grid>
+
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="#EBEBEB"/>
+            <GridSplitter Grid.Column="3" Width="5" HorizontalAlignment="Stretch" Background="#EBEBEB"/>
+
+            <!-- REPOSITORY COMMITLOG -->
+            <Grid Grid.Column="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="200"/>
+                </Grid.RowDefinitions>
+                
+                <DataGrid Grid.Row="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Revision" Width="80"/>
+                        <DataGridTextColumn Header="Description" Width="*"/>
+                        <DataGridTextColumn Header="Date" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" Background="#EBEBEB"/>
+
+                <TextBox Grid.Row="2"/>
+            </Grid>
         </Grid>
 
 

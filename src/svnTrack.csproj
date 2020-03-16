@@ -77,12 +77,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\SkinResourceDictionary.cs" />
     <Compile Include="Views\SvnCheckoutView.xaml.cs">
       <DependentUpon>SvnCheckoutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SvnLoginView.xaml.cs">
       <DependentUpon>SvnLoginView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Assets\Themes\Dark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Themes\Light.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -176,6 +185,10 @@
     <Resource Include="Assets\Icons\Revert.png" />
     <Resource Include="Assets\Icons\Unlock.png" />
     <Resource Include="Assets\Icons\Update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Dark.png" />
+    <Resource Include="Assets\Icons\Light.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
