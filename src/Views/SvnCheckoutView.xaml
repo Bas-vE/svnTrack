@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:svnTrack.Views"
         mc:Ignorable="d"
-        Title="Svn Checkout" ResizeMode="NoResize" WindowStyle="ToolWindow" Height="180" Width="400">
+        Title="Svn Checkout" ResizeMode="NoResize" WindowStyle="ToolWindow" Height="200" Width="500">
     
     
     <Grid>
@@ -19,7 +19,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Margin="10">
             <StackPanel.Resources>
@@ -32,16 +33,16 @@
             <TextBlock Text="Revision:"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Margin="10">
-            <StackPanel.Resources>
-                <Style TargetType="TextBox">
-                    <Setter Property="Margin" Value="5"/>
-                </Style>
-            </StackPanel.Resources>
-            <TextBox/>
-            <TextBox/>
-            <TextBox Width="50" HorizontalAlignment="Left"/>
-        </StackPanel>
+            <StackPanel Grid.Column="1" Margin="10">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBox/>
+                <TextBox/>
+                <TextBox Width="50" HorizontalAlignment="Left"/>
+            </StackPanel>
         </Grid>
 
         <Border Grid.Row="1" Background="#EBEBEB" BorderBrush="#A9ACAF" BorderThickness="0,1,0,0" Height="45" VerticalAlignment="Bottom">

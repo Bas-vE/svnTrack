@@ -10,6 +10,9 @@ using svnTrack.Models.Preferences;
 using svnTrack.Core.Messaging;
 using svnTrack.Models.Messages;
 using svnTrack.Models;
+using System.Collections.ObjectModel;
+using svnTrack.Models.Svn;
+using svnTrack.Views;
 
 namespace svnTrack.ViewModels
 {
@@ -18,7 +21,15 @@ namespace svnTrack.ViewModels
     {
         #region Private Commands
 
+        private ICommand _checkoutCommand;
+        private ICommand _updateCommand;
+        private ICommand _commandCommand;
+        private ICommand _revertCommand;
+        private ICommand _getLockCommand;
+        private ICommand _releaseLockCommand;
         private ICommand _switchThemeCommand;
+
+
         private bool _isdarkTheme = false;
 
         #endregion Private Commands
@@ -35,10 +46,19 @@ namespace svnTrack.ViewModels
 
             //subscribe to the ExampleMessage and change the StatusBarText property everytime the a new message gets published
             MessageHub.Instance.Subscribe<ExampleMessage>(m => StatusBarText = m.Message);
+
+            var rnd = new Random(DateTime.Now.Millisecond);
+
+            for (int i = 0; i < 10; i++)
+            {
+                Repositories.Add(new SvnRepository($"Repository {i.ToString()}",rnd.Next(0, 200)));
+            }
         }
 
 
         #region Public Properties
+
+        public ObservableCollection<SvnRepository> Repositories { get; } = new ObservableCollection<SvnRepository>();
 
         public string StatusBarText
         {
@@ -70,7 +90,36 @@ namespace svnTrack.ViewModels
         #region Public Commands
 
         /// <summary>
-        /// This is the command the Switchtheme button binds on
+        /// This is the command the Checkout button binds to
+        /// </summary>
+        public ICommand CheckoutCommand
+        {
+            get
+            {
+                if (_checkoutCommand == null)
+                {
+                    _checkoutCommand = new RelayCommand(
+                        param => Checkout_Execute(),
+                        param => Checkout_CanExecute()
+                    );
+                }
+                return _checkoutCommand;
+            }
+        }
+
+        private void Checkout_Execute()
+        {
+            new SvnCheckoutView().ShowDialog();
+        }
+
+        private bool Checkout_CanExecute()
+        {
+            return true;
+
+        }
+
+        /// <summary>
+        /// This is the command the SwitchTheme button binds to
         /// </summary>
         public ICommand SwitchThemeCommand
         {
@@ -93,17 +142,9 @@ namespace svnTrack.ViewModels
         private void SwitchTheme_Execute()
         {
             if(App.Skin == Skin.Dark)
-            {
                 (App.Current as App).ChangeSkin(Skin.Light);
-                IsDarkTheme = false;
-            }
-
             else
-            {
                 (App.Current as App).ChangeSkin(Skin.Dark);
-                IsDarkTheme = true;
-
-            }
 
             //publish on the Switch Theme Message
             MessageHub.Instance.Publish(new ExampleMessage($"Theme Switched to {App.Skin.ToString()}"));

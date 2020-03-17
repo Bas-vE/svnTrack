@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:svnTrack"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="svnTrack" MinHeight="200" MinWidth="300" Height="700" Width="1000" ResizeMode="CanResizeWithGrip" Style="{DynamicResource SvnWindowStyle}">
+        Title="svnTrack" MinHeight="200" MinWidth="300" Height="700" Width="1000" ResizeMode="CanResizeWithGrip" SnapsToDevicePixels="True">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -48,83 +49,63 @@
             <ToolBar ToolBarTray.IsLocked="True">
                 <ToolBar.Resources>
                     <Style TargetType="{x:Type Button}" x:Key="{x:Static ToolBar.ButtonStyleKey}" >
-                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="Margin" Value="10 5"/>
                         <Setter Property="Padding" Value="5"/>
                     </Style>
                 </ToolBar.Resources>
-                <Button ToolTip="Svn Checkout">
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="/Assets/Icons/Checkout.png" />
-                        </Image.Source>
-                    </Image>
+                <Button ToolTip="Svn Checkout" Command="{Binding CheckoutCommand}">
+                    <StackPanel>
+                        <Image Source="{StaticResource CheckoutDrawingImage}" Width="32"/>
+                        <TextBlock Text="Checkout"/>
+                    </StackPanel>
                 </Button>
                 <Separator/>
                 <Button ToolTip="Svn Update">
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="/Assets/Icons/Update.png" />
-                        </Image.Source>
-                    </Image>
+                    <StackPanel>
+                        <Image Source="{StaticResource UpdateDrawingImage}" Width="30"/>
+                        <TextBlock Text="Update"/>
+                    </StackPanel>
                 </Button>
                 <Button ToolTip="Svn Commit">
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="/Assets/Icons/Commit.png" />
-                        </Image.Source>
-                    </Image>
+                    <StackPanel>
+                        <Image Source="{StaticResource CommitDrawingImage}" Width="30"/>
+                        <TextBlock Text="Commit"/>
+                    </StackPanel>
                 </Button>
                 <Button ToolTip="Svn Revert">
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="/Assets/Icons/Revert.png" />
-                        </Image.Source>
-                    </Image>
+                    <StackPanel>
+                        <Image Source="{StaticResource RevertDrawingImage}" Width="30"/>
+                        <TextBlock Text="Revert"/>
+                    </StackPanel>
                 </Button>
                 <Separator/>
                 <Button ToolTip="Svn Clean Up">
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="/Assets/Icons/CleanUp.png" />
-                        </Image.Source>
-                    </Image>
+                    <StackPanel>
+                        <Image Source="{StaticResource CleanupDrawingImage}" Width="30"/>
+                        <TextBlock Text="Clean Up"/>
+                    </StackPanel>
                 </Button>
                 <Button ToolTip="Svn Get Lock">
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="/Assets/Icons/Lock.png" />
-                        </Image.Source>
-                    </Image>
+                    <StackPanel>
+                        <Image Source="{StaticResource GetLockDrawingImage}" Width="30"/>
+                        <TextBlock Text="Get Lock"/>
+                    </StackPanel>
                 </Button>
                 <Button ToolTip="Svn Release Lock">
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="/Assets/Icons/Unlock.png" />
-                        </Image.Source>
-                    </Image>
+                    <StackPanel>
+                        <Image Source="{StaticResource UnlockDrawingImage}" Width="30"/>
+                        <TextBlock Text="Release Lock"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding SwitchThemeCommand}">
+                    <StackPanel>
+                        <Image Source="{StaticResource ThemeDrawingImage}" Width="30"/>
+                        <TextBlock Text="Theme"/>
+                    </StackPanel>
                 </Button>
             </ToolBar>
 
-            <ToolBar ToolBarTray.IsLocked="True">
-                <ToggleButton Margin="5" Padding="5" Command="{Binding SwitchThemeCommand}">
-                    <Image Width="24" Height="24"  >
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsDarkTheme}" Value="False">
-                                        <Setter Property="Source" Value="/Assets/Icons/Dark.png"/>
-                                        <Setter Property="ToolTip" Value="Swith to Light Theme"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsDarkTheme}" Value="True">
-                                        <Setter Property="Source" Value="/Assets/Icons/Light.png"/>
-                                        <Setter Property="ToolTip" Value="Swith to Dark Theme"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </ToggleButton>
-            </ToolBar>
 
         </ToolBarTray>
         
@@ -148,49 +129,42 @@
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="1"/>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="*"/>
+
             </Grid.ColumnDefinitions>
 
             <!-- REPOSITORY PANEL -->
-            <Grid Grid.Column="0">
-                <TreeView Background="#EBEBEB">
-                    <TreeView.Resources>
-                        <Style TargetType="{x:Type TreeViewItem}">
-                            <Setter Property="HeaderTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image>
-                                                <Image.Source>
-                                                    <BitmapImage UriSource="/Assets/Icons/Repository.png" />
-                                                </Image.Source>
-                                            </Image>
-                                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Margin" Value="5"/>
-                        </Style>
-                    </TreeView.Resources>
-                    <TreeViewItem Header="Repository 01"/>
-                    <TreeViewItem Header="Repository 02"/>
-                    <TreeViewItem Header="Repository 03"/>
-                    <TreeViewItem Header="Repository 04"/>
-                    <TreeViewItem Header="Repository 01"/>
-                    <TreeViewItem Header="Repository 02"/>
-                    <TreeViewItem Header="Repository 03"/>
-                    <TreeViewItem Header="Repository 04"/>
-                </TreeView>
+            <Grid Grid.Column="0" Background="#EBEBEB">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Repositories" Margin="5"/>
+                <ListBox Grid.Row="1" Background="#EBEBEB" ItemsSource="{Binding Repositories}" BorderThickness="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                    <Image Source="{StaticResource RepositoryDrawingImage}"/>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding NrOfChanges}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5"/>
+                            </Grid>
+
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
 
             <!-- FILES PANEL -->
             <Grid Grid.Column="2">
                 <TabControl>
-                    <TabItem Header="All">
+                    <TabItem Header="Files">
                         <TreeView>
                             <TreeView.ItemContainerStyle>
                                 <Style TargetType="{x:Type TreeViewItem}">
@@ -224,32 +198,14 @@
                             </TreeViewItem>
                         </TreeView>
                     </TabItem>
-                    <TabItem Header="Changed" />
+                    <TabItem Header="Revisions"></TabItem>
                 </TabControl>
 
+
             </Grid>
 
-            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="#EBEBEB"/>
-            <GridSplitter Grid.Column="3" Width="5" HorizontalAlignment="Stretch" Background="#EBEBEB"/>
+            <GridSplitter Grid.Column="1" Width="1" HorizontalAlignment="Stretch" Background="#EBEBEB"/>
 
-            <!-- REPOSITORY COMMITLOG -->
-            <Grid Grid.Column="4">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="5"/>
-                    <RowDefinition Height="200"/>
-                </Grid.RowDefinitions>
-                
-                <DataGrid Grid.Row="0">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Revision" Width="80"/>
-                        <DataGridTextColumn Header="Description" Width="*"/>
-                        <DataGridTextColumn Header="Date" Width="100"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-
-                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" Background="#EBEBEB"/>
-            </Grid>
         </Grid>
 
 
