@@ -130,7 +130,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="1"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
 
@@ -165,40 +165,53 @@
             <Grid Grid.Column="2">
                 <TabControl>
                     <TabItem Header="Files">
-                        <TreeView>
-                            <TreeView.ItemContainerStyle>
-                                <Style TargetType="{x:Type TreeViewItem}">
-                                    <Setter Property="IsExpanded" Value="True" />
-                                </Style>
-                            </TreeView.ItemContainerStyle>
-                            <TreeViewItem Header="Doc">
-                                <TreeViewItem Header="Manual.docx"/>
-                            </TreeViewItem>
-                            <TreeViewItem Header="Src">
-                                <TreeViewItem Header="Assets">
-                                    <TreeViewItem Header="Image01.png"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TreeView>
+                                <TreeView.ItemContainerStyle>
+                                    <Style TargetType="{x:Type TreeViewItem}">
+                                        <Setter Property="IsExpanded" Value="True" />
+                                    </Style>
+                                </TreeView.ItemContainerStyle>
+                                <TreeViewItem Header="Doc">
+                                    <TreeViewItem Header="Manual.docx"/>
                                 </TreeViewItem>
-                                <TreeViewItem Header="Core">
-                                    <TreeViewItem Header="Extensions"/>
-                                    <TreeViewItem Header="Logging"/>
-                                </TreeViewItem>
-                                <TreeViewItem Header="Models">
-                                    <TreeViewItem Header="SettingsManager.cs"/>
-                                    <TreeViewItem Header="MessageMediator.cs"/>
-                                </TreeViewItem>
-                                <TreeViewItem Header="ViewModels">
-                                    <TreeViewItem Header="BaseViewModel.cs"/>
-                                    <TreeViewItem Header="MainWindowViewModel.cs"/>
-                                    <TreeViewItem Header="MessageMediator.cs"/>
-                                </TreeViewItem>
+                                <TreeViewItem Header="Src">
+                                    <TreeViewItem Header="Assets">
+                                        <TreeViewItem Header="Image01.png"/>
+                                    </TreeViewItem>
+                                    <TreeViewItem Header="Core">
+                                        <TreeViewItem Header="Extensions"/>
+                                        <TreeViewItem Header="Logging"/>
+                                    </TreeViewItem>
+                                    <TreeViewItem Header="Models">
+                                        <TreeViewItem Header="SettingsManager.cs"/>
+                                        <TreeViewItem Header="MessageMediator.cs"/>
+                                    </TreeViewItem>
+                                    <TreeViewItem Header="ViewModels">
+                                        <TreeViewItem Header="BaseViewModel.cs"/>
+                                        <TreeViewItem Header="MainWindowViewModel.cs"/>
+                                        <TreeViewItem Header="MessageMediator.cs"/>
+                                    </TreeViewItem>
 
-                                <TreeViewItem Header="Project.vsproj"/>
-                                <TreeViewItem Header="Solution.sl"/>
-                                <TreeViewItem Header="Readme.md"/>
-                            </TreeViewItem>
-                        </TreeView>
+                                    <TreeViewItem Header="Project.vsproj"/>
+                                    <TreeViewItem Header="Solution.sl"/>
+                                    <TreeViewItem Header="Readme.md"/>
+                                </TreeViewItem>
+                            </TreeView>
+                        </Grid>
+
                     </TabItem>
-                    <TabItem Header="Revisions"></TabItem>
+                    <TabItem Header="Revisions">
+                        <DataGrid>
+                            
+                        </DataGrid>
+                    </TabItem>
                 </TabControl>
 
 
