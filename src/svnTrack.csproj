@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>svnTrack.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SharpSvn, Version=1.9007.3987.251, Culture=neutral, PublicKeyToken=d729672594885a28, processorArchitecture=AMD64">
       <HintPath>packages\SharpSvn.1.9-x64.1.9007.3987.251\lib\net40\SharpSvn.dll</HintPath>
@@ -77,18 +80,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\SkinResourceDictionary.cs" />
+    <Compile Include="Models\Svn\SvnRepository.cs" />
     <Compile Include="Views\SvnCheckoutView.xaml.cs">
       <DependentUpon>SvnCheckoutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SvnLoginView.xaml.cs">
       <DependentUpon>SvnLoginView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Assets\Themes\Dark.xaml">
+    <Page Include="Resources\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\Themes\Light.xaml">
+    <Page Include="Resources\Dark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Light.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,9 +168,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\SVN\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
@@ -189,6 +194,18 @@
   <ItemGroup>
     <Resource Include="Assets\Icons\Dark.png" />
     <Resource Include="Assets\Icons\Light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Files\Directory.png" />
+    <Resource Include="Assets\Files\FileArchive.png" />
+    <Resource Include="Assets\Files\FileConfiguration.png" />
+    <Resource Include="Assets\Files\FileMusic.png" />
+    <Resource Include="Assets\Files\FileSourceCode.png" />
+    <Resource Include="Assets\Files\FileText.png" />
+    <Resource Include="Assets\Files\FileUnknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Repository.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

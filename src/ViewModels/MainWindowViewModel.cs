@@ -104,9 +104,6 @@ namespace svnTrack.ViewModels
                 IsDarkTheme = true;
 
             }
-                
-
-            App.Current.MainWindow.UpdateLayout();
 
             //publish on the Switch Theme Message
             MessageHub.Instance.Publish(new ExampleMessage($"Theme Switched to {App.Skin.ToString()}"));
